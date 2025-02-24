@@ -334,34 +334,173 @@ console.log(`Number of words in "${testString1}":`, countWords(testString1)); //
 console.log(`Number of words in "${testString2}":`, countWords(testString2)); // Output: 6
 ```
 
-## 11.
+## 11. Implement String Compression Using Counts of Repeated Characters
 
 ```javascript
+function compressString(str) {
+    // Initialize an empty string to store the compressed result
+    let compressedStr = "";
 
+    // Initialize a counter for the current character
+    let count = 1;
+
+    // Loop through the string
+    for (let i = 0; i < str.length; i++) {
+        // If the next character is the same as the current character, increment the count
+        if (str[i] === str[i + 1]) {
+            count++;
+        } else {
+            // Append the current character and count to the compressed string
+            compressedStr += str[i] + count;
+            // Reset the count to 1 for the next character
+            count = 1;
+        }
+    }
+
+    // Return the compressed string if it is shorter than the original string
+    // Otherwise, return the original string
+    return compressedStr.length < str.length ? compressedStr : str;
+}
+
+// Example usage:
+const testString1 = "aabcccccaaa";
+const compressedString1 = compressString(testString1);
+console.log(`Original String: "${testString1}"`); // Output: aabcccccaaa
+console.log(`Compressed String: "${compressedString1}"`); // Output: a2b1c5a3
+
+const testString2 = "abcdef";
+const compressedString2 = compressString(testString2);
+console.log(`Original String: "${testString2}"`); // Output: abcdef
+console.log(`Compressed String: "${compressedString2}"`); // Output: abcdef (since compressed string is not shorter)
 ```
 
-## 12.
+## 12. Extract a Substring Between Two Characters
 
 ```javascript
+function extractSubstring(str, startChar, endChar) {
+    // Find the index of the start character
+    const startIndex = str.indexOf(startChar);
+    if (startIndex === -1) {
+        return ""; // Start character not found
+    }
 
+    // Find the index of the end character
+    const endIndex = str.indexOf(endChar, startIndex + 1);
+    if (endIndex === -1) {
+        return ""; // End character not found
+    }
+
+    // Extract the substring between the start and end characters
+    return str.substring(startIndex + 1, endIndex);
+}
+
+// Example usage:
+const testString1 = "Hello [World]!";
+const substring1 = extractSubstring(testString1, '[', ']');
+console.log(`Extracted Substring: "${substring1}"`); // Output: "World"
+
+const testString2 = "This is an (example) string.";
+const substring2 = extractSubstring(testString2, '(', ')');
+console.log(`Extracted Substring: "${substring2}"`); // Output: "example"
 ```
 
-## 13.
+## 13. Check if Two Strings are Rotations of Each Other
 
 ```javascript
+function areRotations(str1, str2) {
+    // Check if the lengths of the strings are equal
+    if (str1.length !== str2.length) {
+        return false;
+    }
 
+    // Concatenate the first string with itself
+    const concatenated = str1 + str1;
+
+    // Check if the second string is a substring of the concatenated string
+    return concatenated.includes(str2);
+}
+
+// Example usage:
+const string1 = "ABCD";
+const string2 = "CDAB";
+const string3 = "ACBD";
+
+console.log(`Are "${string1}" and "${string2}" rotations of each other?`, areRotations(string1, string2)); // Output: true
+console.log(`Are "${string1}" and "${string3}" rotations of each other?`, areRotations(string1, string3)); // Output: false
 ```
 
-## 14.
+## 14. Find All Permutations of a Given String
 
 ```javascript
+function findPermutations(str) {
+    const results = [];
 
+    // Base case: if the string length is 1, return the string as the only permutation
+    if (str.length === 1) {
+        results.push(str);
+        return results;
+    }
+
+    // Recursive case: find all permutations of the string
+    for (let i = 0; i < str.length; i++) {
+        // Remove the character at index i and find permutations of the remaining string
+        const remaining = str.slice(0, i) + str.slice(i + 1);
+        const remainingPermutations = findPermutations(remaining);
+
+        // Add the removed character to the front of each permutation of the remaining string
+        for (let permutation of remainingPermutations) {
+            results.push(str[i] + permutation);
+        }
+    }
+
+    return results;
+}
+
+// Example usage:
+const testString = "ABC";
+const permutations = findPermutations(testString);
+console.log(`Permutations of "${testString}":`, permutations);
+// Output: ["ABC", "ACB", "BAC", "BCA", "CAB", "CBA"]
 ```
 
-## 15.
+## 15. Find the Minimum Number of Steps to Convert One String to Another
 
 ```javascript
+function editDistance(str1, str2) {
+    const m = str1.length;
+    const n = str2.length;
 
+    // Create a 2D array to store the edit distances
+    const dp = Array(m + 1).fill(null).map(() => Array(n + 1).fill(0));
+
+    // Initialize the first row and column of the array
+    for (let i = 0; i <= m; i++) {
+        dp[i][0] = i;
+    }
+    for (let j = 0; j <= n; j++) {
+        dp[0][j] = j;
+    }
+
+    // Fill in the rest of the array
+    for (let i = 1; i <= m; i++) {
+        for (let j = 1; j <= n; j++) {
+            if (str1[i - 1] === str2[j - 1]) {
+                dp[i][j] = dp[i - 1][j - 1];
+            } else {
+                dp[i][j] = 1 + Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]);
+            }
+        }
+    }
+
+    // The edit distance is the value in the bottom-right corner of the array
+    return dp[m][n];
+}
+
+// Example usage:
+const string1 = "kitten";
+const string2 = "sitting";
+console.log(`Edit Distance between "${string1}" and "${string2}":`, editDistance(string1, string2));
+// Output: 3
 ```
 
 ## 16.
