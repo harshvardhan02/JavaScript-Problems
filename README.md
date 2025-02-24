@@ -503,34 +503,148 @@ console.log(`Edit Distance between "${string1}" and "${string2}":`, editDistance
 // Output: 3
 ```
 
-## 16.
+## 16. Count the Frequency of Each Character in a String
 
 ```javascript
+function countCharacterFrequency(str) {
+    // Create an object to store character frequencies
+    const frequencyMap = {};
 
+    // Loop through each character in the string
+    for (let char of str) {
+        // If the character is already in the map, increment its count
+        if (frequencyMap[char]) {
+            frequencyMap[char]++;
+        } else {
+            // Otherwise, add the character to the map with a count of 1
+            frequencyMap[char] = 1;
+        }
+    }
+
+    return frequencyMap;
+}
+
+// Example usage:
+const testString = "hello world";
+const frequency = countCharacterFrequency(testString);
+console.log(`Character frequency in "${testString}":`, frequency);
+// Output: { h: 1, e: 1, l: 3, o: 2, ' ': 1, w: 1, r: 1, d: 1 }
 ```
 
-## 17.
+## 17. Create a New String by Removing All Occurrences of a Given Character
 
 ```javascript
+function removeCharacter(str, charToRemove) {
+    // Initialize an empty string to store the result
+    let result = '';
 
+    // Loop through each character in the string
+    for (let char of str) {
+        // If the character is not the one to remove, add it to the result
+        if (char !== charToRemove) {
+            result += char;
+        }
+    }
+
+    return result;
+}
+
+// Example usage:
+const testString = "hello world";
+const charToRemove = 'o';
+const newString = removeCharacter(testString, charToRemove);
+console.log(`Original String: "${testString}"`); // Output: "hello world"
+console.log(`New String (without '${charToRemove}'): "${newString}"`); // Output: "hell wrld"
 ```
 
-## 18.
+## 18. Determine if a String is a Valid Number (Integer/Float)
 
 ```javascript
+function isValidNumber(str) {
+    // Regular expression to match valid integers and floats (including scientific notation)
+    const numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
 
+    // Test the string against the regular expression
+    return numberRegex.test(str);
+}
+
+// Example usage:
+const testString1 = "123";
+const testString2 = "123.456";
+const testString3 = "-123.456e+789";
+const testString4 = "abc123";
+
+console.log(`Is "${testString1}" a valid number?`, isValidNumber(testString1)); // Output: true
+console.log(`Is "${testString2}" a valid number?`, isValidNumber(testString2)); // Output: true
+console.log(`Is "${testString3}" a valid number?`, isValidNumber(testString3)); // Output: true
+console.log(`Is "${testString4}" a valid number?`, isValidNumber(testString4)); // Output: false
 ```
 
-## 19.
+## 19. Check if a String is an Isogram (No Repeated Characters)
 
 ```javascript
+function isIsogram(str) {
+    // Create a set to store unique characters
+    const charSet = new Set();
 
+    // Convert the string to lowercase to make the check case-insensitive
+    const lowerCaseStr = str.toLowerCase();
+
+    // Loop through each character in the string
+    for (let char of lowerCaseStr) {
+        // If the character is already in the set, it's not an isogram
+        if (charSet.has(char)) {
+            return false;
+        }
+
+        // Add the character to the set
+        charSet.add(char);
+    }
+
+    // If no characters were repeated, it's an isogram
+    return true;
+}
+
+// Example usage:
+const testString1 = "Dermatoglyphics";
+const testString2 = "isogram";
+const testString3 = "aba";
+const testString4 = "moOse";
+
+console.log(`Is "${testString1}" an isogram?`, isIsogram(testString1)); // Output: true
+console.log(`Is "${testString2}" an isogram?`, isIsogram(testString2)); // Output: true
+console.log(`Is "${testString3}" an isogram?`, isIsogram(testString3)); // Output: false
+console.log(`Is "${testString4}" an isogram?`, isIsogram(testString4)); // Output: false
 ```
 
-## 20.
+## 20. Implement a Method to Compare Two Strings for Equality (Without Using .equals())
 
 ```javascript
+function areStringsEqual(str1, str2) {
+    // Check if the lengths of the strings are equal
+    if (str1.length !== str2.length) {
+        return false;
+    }
 
+    // Loop through each character in the strings
+    for (let i = 0; i < str1.length; i++) {
+        // Compare the characters at the same position in both strings
+        if (str1[i] !== str2[i]) {
+            return false;
+        }
+    }
+
+    // If all characters are equal, return true
+    return true;
+}
+
+// Example usage:
+const string1 = "hello";
+const string2 = "hello";
+const string3 = "world";
+
+console.log(`Are "${string1}" and "${string2}" equal?`, areStringsEqual(string1, string2)); // Output: true
+console.log(`Are "${string1}" and "${string3}" equal?`, areStringsEqual(string1, string3)); // Output: false
 ```
 
 ## 21.
