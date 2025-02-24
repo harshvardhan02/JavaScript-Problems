@@ -2,7 +2,7 @@
 ## JavaScript Problems
 
 
-![Logo](https://cdn.worldvectorlogo.com/logos/logo-javascript.svg)
+![Logo](https://cdn-icons-png.flaticon.com/128/5968/5968292.png)
 
 
 ## Authors
