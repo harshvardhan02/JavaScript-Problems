@@ -4,8 +4,12 @@
 
 ![Logo](https://cdn-icons-png.flaticon.com/128/5968/5968292.png)
 
+## Table of Contents
 
-## Authors
+- [Reverse a String Without Using Built-in Functions](#1-reverse-a-string-without-using-built-in-functions)
+- [Check if a String is a Palindrome, Ignoring Case](#2-check-if-a-string-is-a-palindrome-ignoring-case)
+
+## Author
 
 - [@harshvardhan](https://www.linkedin.com/in/harshvardhan-singh-baghel-691b67a1/)
 
