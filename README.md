@@ -647,63 +647,264 @@ console.log(`Are "${string1}" and "${string2}" equal?`, areStringsEqual(string1,
 console.log(`Are "${string1}" and "${string3}" equal?`, areStringsEqual(string1, string3)); // Output: false
 ```
 
-## 21.
+## 21. Rotate a string to the left by a given number of characters.
 
 ```javascript
+/**
+ * Rotate a string to the left by a given number of characters.
+ *
+ * @param {string} s - The original string.
+ * @param {number} n - The number of characters to rotate the string to the left.
+ * @returns {string} - The rotated string.
+ */
+function rotateStringLeft(s, n) {
+    if (!s) {
+        return s;
+    }
 
+    n = n % s.length; // Handle cases where n is larger than the length of the string
+    return s.slice(n) + s.slice(0, n);
+}
+
+// Example usage:
+const originalString = "hello";
+const numChars = 2;
+const rotatedString = rotateStringLeft(originalString, numChars);
+console.log(rotatedString);  // Output: "llohe"
 ```
 
-## 22.
+## 22. Replace all instances of a substring with another substring.
 
 ```javascript
+/**
+ * Replace all instances of a substring with another substring.
+ *
+ * @param {string} str - The original string.
+ * @param {string} search - The substring to search for.
+ * @param {string} replacement - The substring to replace with.
+ * @returns {string} - The updated string with all instances of the substring replaced.
+ */
+function replaceAllInstances(str, search, replacement) {
+    return str.split(search).join(replacement);
+}
 
+// Example usage:
+const originalString = "hello world, hello universe";
+const searchString = "hello";
+const replacementString = "hi";
+const updatedString = replaceAllInstances(originalString, searchString, replacementString);
+console.log(updatedString);  // Output: "hi world, hi universe"
 ```
 
-## 23.
+## 23. Check if a string is a subsequence of another string.
 
 ```javascript
+/**
+ * Check if a string is a subsequence of another string.
+ *
+ * @param {string} s1 - The string to check if it is a subsequence.
+ * @param {string} s2 - The string to check against.
+ * @returns {boolean} - True if s1 is a subsequence of s2, false otherwise.
+ */
+function isSubsequence(s1, s2) {
+    let i = 0, j = 0;
+    while (i < s1.length && j < s2.length) {
+        if (s1[i] === s2[j]) {
+            i++;
+        }
+        j++;
+    }
+    return i === s1.length;
+}
 
+// Example usage:
+const string1 = "abc";
+const string2 = "aebdc";
+const result = isSubsequence(string1, string2);
+console.log(result);  // Output: true
 ```
 
-## 24.
+## 24. Find all unique characters in a string.
 
 ```javascript
+/**
+ * Find all unique characters in a string.
+ *
+ * @param {string} str - The input string.
+ * @returns {string} - A string containing all unique characters.
+ */
+function findUniqueCharacters(str) {
+    const uniqueChars = new Set();
+    for (const char of str) {
+        uniqueChars.add(char);
+    }
+    return Array.from(uniqueChars).join('');
+}
 
+// Example usage:
+const inputString = "hello world";
+const uniqueCharacters = findUniqueCharacters(inputString);
+console.log(uniqueCharacters);  // Output: "helo wrd"
 ```
 
-## 25.
+## 25. Convert a given string to camel case.
 
 ```javascript
+/**
+ * Convert a given string to camel case.
+ *
+ * @param {string} str - The input string.
+ * @returns {string} - The camel case string.
+ */
+function toCamelCase(str) {
+    return str
+        .toLowerCase()
+        .replace(/[-_ ](.)/g, (match, group1) => group1.toUpperCase());
+}
 
+// Example usage:
+const inputString = "hello_world-this is a test";
+const camelCaseString = toCamelCase(inputString);
+console.log(camelCaseString);  // Output: "helloWorldThisIsATest"
 ```
 
-## 26.
+## 26. Count the number of times one string occurs in another string.
 
 ```javascript
+/**
+ * Count the number of times one string occurs in another string.
+ *
+ * @param {string} str - The string to search within.
+ * @param {string} search - The substring to count occurrences of.
+ * @returns {number} - The number of occurrences of the substring within the string.
+ */
+function countOccurrences(str, search) {
+    if (search.length === 0) {
+        return 0;
+    }
 
+    let count = 0;
+    let pos = str.indexOf(search);
+
+    while (pos !== -1) {
+        count++;
+        pos = str.indexOf(search, pos + search.length);
+    }
+
+    return count;
+}
+
+// Example usage:
+const mainString = "hello world, hello universe";
+const searchString = "hello";
+const occurrences = countOccurrences(mainString, searchString);
+console.log(occurrences);  // Output: 2
 ```
 
-## 27.
+## 27. Extract numbers from a string and return as a list.
 
 ```javascript
+/**
+ * Extract numbers from a string and return as a list.
+ *
+ * @param {string} str - The input string.
+ * @returns {number[]} - A list of numbers extracted from the string.
+ */
+function extractNumbers(str) {
+    const regex = /\d+/g;
+    const matches = str.match(regex);
+    return matches ? matches.map(Number) : [];
+}
 
+// Example usage:
+const inputString = "There are 3 apples, 4 bananas, and 25 grapes.";
+const numbersList = extractNumbers(inputString);
+console.log(numbersList);  // Output: [3, 4, 25]
 ```
 
-## 28.
+## 28. Validate a String as a Proper Email Address
 
 ```javascript
+/**
+ * Validate a string as a proper email address.
+ *
+ * @param {string} email - The input string to validate.
+ * @returns {boolean} - True if the input string is a valid email address, false otherwise.
+ */
+function validateEmail(email) {
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailPattern.test(email);
+}
 
+// Example usage:
+const email1 = "test@example.com";
+const email2 = "invalid-email@";
+console.log(validateEmail(email1));  // Output: true
+console.log(validateEmail(email2));  // Output: false
 ```
 
-## 29.
+## 29. Find the Position of a Substring in a String
 
 ```javascript
+/**
+ * Find the position of a substring in a string.
+ *
+ * @param {string} str - The string to search within.
+ * @param {string} search - The substring to find.
+ * @returns {number} - The position of the first occurrence of the substring, or -1 if not found.
+ */
+function findSubstringPosition(str, search) {
+    return str.indexOf(search);
+}
 
+// Example usage:
+const mainString = "hello world";
+const searchString = "world";
+const position = findSubstringPosition(mainString, searchString);
+console.log(position);  // Output: 6
+
+const notFoundString = "planet";
+const notFoundPosition = findSubstringPosition(mainString, notFoundString);
+console.log(notFoundPosition);  // Output: -1
 ```
 
-## 30.
+## 30. Merge Two Strings Alternately
 
 ```javascript
+/**
+ * Merge two strings alternately.
+ *
+ * @param {string} s1 - The first string.
+ * @param {string} s2 - The second string.
+ * @returns {string} - The merged string.
+ */
+function mergeStringsAlternately(s1, s2) {
+    let mergedString = '';
+    let i = 0, j = 0;
+    
+    while (i < s1.length || j < s2.length) {
+        if (i < s1.length) {
+            mergedString += s1[i];
+            i++;
+        }
+        if (j < s2.length) {
+            mergedString += s2[j];
+            j++;
+        }
+    }
+    
+    return mergedString;
+}
 
+// Example usage:
+const string1 = "abc";
+const string2 = "pqr";
+const mergedString = mergeStringsAlternately(string1, string2);
+console.log(mergedString);  // Output: "apbqcr"
+
+const string3 = "ab";
+const string4 = "pqrs";
+const mergedString2 = mergeStringsAlternately(string3, string4);
+console.log(mergedString2);  // Output: "apbqrs"
 ```
 
